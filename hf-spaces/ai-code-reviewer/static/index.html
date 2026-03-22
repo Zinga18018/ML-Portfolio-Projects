@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Code Reviewer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <div>
+                <h1>AI Code Reviewer</h1>
+                <p class="subtitle">TinyLlama-1.1B -- automated code review for bugs, security, performance</p>
+            </div>
+            <div class="model-badge">TinyLlama/TinyLlama-1.1B-Chat-v1.0</div>
+        </header>
+
+        <div class="editor-area">
+            <div class="editor-toolbar">
+                <select id="language">
+                    <option value="python">Python</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="typescript">TypeScript</option>
+                    <option value="java">Java</option>
+                    <option value="go">Go</option>
+                    <option value="rust">Rust</option>
+                    <option value="c">C</option>
+                    <option value="cpp">C++</option>
+                </select>
+                <div class="focus-tabs">
+                    <button class="focus-btn active" data-focus="general">General</button>
+                    <button class="focus-btn" data-focus="security">Security</button>
+                    <button class="focus-btn" data-focus="performance">Perf</button>
+                    <button class="focus-btn" data-focus="style">Style</button>
+                </div>
+            </div>
+            <textarea id="codeInput" placeholder="Paste your code here..." rows="14" spellcheck="false"></textarea>
+        </div>
+
+        <button class="btn-primary" id="reviewBtn" onclick="runReview()">Review Code</button>
+
+        <!-- Results -->
+        <div id="result" class="hidden">
+            <!-- Score + Verdict Row -->
+            <div class="score-row">
+                <div class="score-ring-wrap">
+                    <canvas id="scoreRing" width="120" height="120"></canvas>
+                    <div class="score-ring-text">
+                        <span id="scoreNum" class="score-num">--</span>
+                        <span class="score-label">/100</span>
+                    </div>
+                </div>
+                <div class="verdict-info">
+                    <div id="verdictTag" class="verdict-tag">--</div>
+                    <div id="metaTag" class="meta-tag"></div>
+                </div>
+            </div>
+
+            <!-- Summary bar -->
+            <div class="summary-bar" id="summaryBar"></div>
+
+            <!-- Issue cards -->
+            <div id="issueCards" class="issue-cards"></div>
+
+            <!-- Raw output toggle -->
+            <button class="btn-toggle" onclick="toggleRaw()">Show Raw Output</button>
+            <pre id="rawOutput" class="raw-output hidden"></pre>
+        </div>
+
+        <div class="examples">
+            <p class="examples-title">Try an example:</p>
+            <button class="example-btn" onclick="loadExample('sql')">SQL Injection</button>
+            <button class="example-btn" onclick="loadExample('perf')">N+1 Fetches</button>
+            <button class="example-btn" onclick="loadExample('fib')">Slow Fibonacci</button>
+        </div>
+
+        <footer>
+            <p>Built with PyTorch + HuggingFace Transformers | <a href="https://github.com/Zinga18018/ai-code-reviewer" target="_blank">Source Code</a></p>
+        </footer>
+    </div>
+    <script src="/script.js"></script>
+</body>
+</html>

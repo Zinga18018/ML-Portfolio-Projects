@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Agent Orchestrator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <div>
+                <h1>Multi-Agent Orchestrator</h1>
+                <p class="subtitle">Planner + Specialists + Synthesizer -- powered by TinyLlama-1.1B</p>
+            </div>
+            <div class="model-badge">TinyLlama/TinyLlama-1.1B-Chat-v1.0</div>
+        </header>
+
+        <div class="tabs">
+            <button class="tab active" data-tab="orchestrate">Orchestrate</button>
+            <button class="tab" data-tab="single">Single Agent</button>
+        </div>
+
+        <!-- Orchestrate Tab -->
+        <div id="tab-orchestrate" class="tab-content active">
+            <div class="card">
+                <textarea id="taskInput" placeholder="e.g., Write a Python function to find prime numbers and analyze its time complexity" rows="4" spellcheck="false"></textarea>
+                <p class="section-label">Select specialist agents:</p>
+                <div class="agent-toggles">
+                    <label class="toggle"><input type="checkbox" id="useCoder" checked> Coder</label>
+                    <label class="toggle"><input type="checkbox" id="useResearcher" checked> Researcher</label>
+                    <label class="toggle"><input type="checkbox" id="useAnalyst"> Analyst</label>
+                </div>
+                <div class="row">
+                    <label class="label">Max tokens: <input type="number" id="maxTokens" class="input small" value="300" min="128" max="512" step="64"></label>
+                    <button class="btn-primary" id="orchBtn" onclick="runOrchestrate()">Run Pipeline</button>
+                </div>
+            </div>
+
+            <div class="examples">
+                <p class="examples-title">Try an example:</p>
+                <button class="example-btn" onclick="loadExample('prime')">Prime Numbers</button>
+                <button class="example-btn" onclick="loadExample('api')">REST API Design</button>
+                <button class="example-btn" onclick="loadExample('sort')">Sort Comparison</button>
+            </div>
+
+            <!-- Pipeline Flowchart -->
+            <div id="flowchart" class="flowchart hidden">
+                <div class="flow-title">Pipeline Progress</div>
+                <div id="flowNodes" class="flow-nodes"></div>
+            </div>
+
+            <!-- Phase results -->
+            <div id="orchResult" class="hidden"></div>
+
+            <!-- Token usage chart -->
+            <div id="tokenChartWrap" class="chart-wrap hidden">
+                <h3 class="chart-title">Token Usage by Agent</h3>
+                <canvas id="tokenChart" height="180"></canvas>
+            </div>
+
+            <!-- Follow-up / conversation mode -->
+            <div id="followUpWrap" class="hidden">
+                <div class="card" style="margin-top: 12px;">
+                    <p class="section-label">Follow-up Question</p>
+                    <textarea id="followUpInput" placeholder="Ask a follow-up based on the results above..." rows="2" spellcheck="false"></textarea>
+                    <button class="btn-primary" id="followUpBtn" onclick="runFollowUp()">Send Follow-up</button>
+                </div>
+                <div id="followUpResult" class="hidden"></div>
+            </div>
+        </div>
+
+        <!-- Single Agent Tab -->
+        <div id="tab-single" class="tab-content">
+            <div class="card">
+                <select id="agentSelect" class="select">
+                    <option value="planner">Planner</option>
+                    <option value="coder" selected>Coder</option>
+                    <option value="researcher">Researcher</option>
+                    <option value="analyst">Analyst</option>
+                    <option value="synthesizer">Synthesizer</option>
+                </select>
+                <textarea id="singleTask" placeholder="What should this agent do?" rows="4" spellcheck="false"></textarea>
+                <div class="row">
+                    <label class="label">Max tokens: <input type="number" id="singleMaxTok" class="input small" value="300" min="128" max="512" step="64"></label>
+                    <button class="btn-primary" id="singleBtn" onclick="runSingle()">Run Agent</button>
+                </div>
+            </div>
+            <div id="singleResult" class="hidden"></div>
+        </div>
+
+        <footer>
+            <p>Built with PyTorch + HuggingFace Transformers | <a href="https://github.com/Zinga18018/multi-agent-orchestrator" target="_blank">Source Code</a></p>
+        </footer>
+    </div>
+    <script src="/script.js"></script>
+</body>
+</html>

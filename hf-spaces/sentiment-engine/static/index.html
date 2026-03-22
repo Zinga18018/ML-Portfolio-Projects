@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Engine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <div>
+                <h1>Sentiment Engine</h1>
+                <p class="subtitle">DistilBERT (67M params) -- real-time sentiment classification</p>
+            </div>
+            <div class="model-badge">distilbert-base-uncased-finetuned-sst-2-english</div>
+        </header>
+
+        <div class="tabs">
+            <button class="tab active" data-tab="single">Analyze</button>
+            <button class="tab" data-tab="batch">Batch</button>
+            <button class="tab" data-tab="compare">Compare</button>
+            <button class="tab" data-tab="history">History</button>
+        </div>
+
+        <!-- Single Analysis -->
+        <div class="panel active" id="single">
+            <textarea id="singleText" placeholder="Type or paste any text here... (sentiment updates as you type)" rows="4"></textarea>
+
+            <!-- Live typing indicator -->
+            <div id="liveIndicator" class="live-indicator hidden">
+                <div class="live-dot"></div>
+                <span id="liveLabel" class="live-label">NEUTRAL</span>
+                <div class="live-meter-wrap">
+                    <div class="live-meter" id="liveMeter"></div>
+                </div>
+                <span id="liveScore" class="live-score">50%</span>
+            </div>
+
+            <button class="btn-primary" onclick="analyzeSingle()">Analyze Sentiment</button>
+
+            <div id="singleResult" class="result hidden">
+                <div class="result-header">
+                    <span id="singleLabel" class="label-tag"></span>
+                    <span id="singleTime" class="time-tag"></span>
+                </div>
+
+                <!-- Confidence meter -->
+                <div class="confidence-ring-wrap">
+                    <canvas id="confidenceRing" width="140" height="140"></canvas>
+                    <div class="confidence-ring-text">
+                        <span id="ringPercent" class="ring-percent">0%</span>
+                        <span class="ring-label">confidence</span>
+                    </div>
+                </div>
+
+                <div class="confidence-bar-wrap">
+                    <div class="confidence-bar" id="singleBar"></div>
+                </div>
+                <div id="singleScore" class="score-text"></div>
+
+                <!-- Emotion Radar -->
+                <div class="emotion-section">
+                    <h3 class="section-title">Emotion Breakdown</h3>
+                    <div class="radar-wrap">
+                        <canvas id="emotionRadar" width="280" height="280"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="examples">
+                <p class="examples-title">Try these:</p>
+                <button class="example-btn" onclick="setExample('This product is absolutely amazing, best purchase ever!')">Positive</button>
+                <button class="example-btn" onclick="setExample('Terrible experience, the service was awful and the food was cold.')">Negative</button>
+                <button class="example-btn" onclick="setExample('The movie was okay, nothing special but not terrible either.')">Neutral-ish</button>
+                <button class="example-btn" onclick="setExample('I am so scared and anxious about the upcoming exam, it makes me worried sick.')">Fear</button>
+                <button class="example-btn" onclick="setExample('What a disgusting and revolting display of horrible behavior!')">Disgust</button>
+            </div>
+        </div>
+
+        <!-- Batch Analysis -->
+        <div class="panel" id="batch">
+            <textarea id="batchText" placeholder="Enter multiple texts, one per line..." rows="8"></textarea>
+            <button class="btn-primary" onclick="analyzeBatch()">Analyze Batch</button>
+            <div id="batchResult" class="result hidden">
+                <div id="batchStats" class="batch-stats"></div>
+                <div class="chart-wrap">
+                    <canvas id="batchChart" height="200"></canvas>
+                </div>
+                <div id="batchItems" class="batch-items"></div>
+            </div>
+        </div>
+
+        <!-- Compare -->
+        <div class="panel" id="compare">
+            <div class="compare-grid">
+                <div>
+                    <label>Text A</label>
+                    <textarea id="compareA" placeholder="First text..." rows="3"></textarea>
+                </div>
+                <div>
+                    <label>Text B</label>
+                    <textarea id="compareB" placeholder="Second text..." rows="3"></textarea>
+                </div>
+            </div>
+            <button class="btn-primary" onclick="analyzeCompare()">Compare</button>
+            <div id="compareResult" class="result hidden"></div>
+        </div>
+
+        <!-- History Timeline -->
+        <div class="panel" id="history">
+            <div class="history-header">
+                <h3 class="section-title">Analysis History</h3>
+                <button class="btn-small" onclick="clearHistory()">Clear</button>
+            </div>
+            <div class="chart-wrap">
+                <canvas id="historyChart" height="180"></canvas>
+            </div>
+            <div id="historyList" class="history-list">
+                <p class="text-dim">No analyses yet. Go to Analyze tab and run some.</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>Built with PyTorch + HuggingFace Transformers | <a href="https://github.com/Zinga18018/sentiment-engine" target="_blank">Source Code</a></p>
+        </footer>
+    </div>
+    <script src="/script.js"></script>
+</body>
+</html>

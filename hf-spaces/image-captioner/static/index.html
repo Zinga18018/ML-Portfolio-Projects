@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Image Captioner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <div>
+                <h1>Neural Image Captioner</h1>
+                <p class="subtitle">ViT encoder + GPT-2 decoder -- image to natural language</p>
+            </div>
+            <div class="model-badge">nlpconnect/vit-gpt2-image-captioning</div>
+        </header>
+
+        <!-- Side-by-side layout -->
+        <div class="main-grid">
+            <!-- Left: Upload -->
+            <div class="upload-panel">
+                <div class="upload-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
+                    <input type="file" id="fileInput" accept="image/*" hidden>
+                    <div id="uploadPrompt">
+                        <div class="upload-icon">+</div>
+                        <p>Drop an image here</p>
+                        <p class="upload-hint">JPG, PNG, WebP</p>
+                    </div>
+                    <img id="previewImg" class="preview-img hidden" alt="Preview">
+                </div>
+                <div id="imageMeta" class="image-meta hidden"></div>
+            </div>
+
+            <!-- Right: Controls + Results -->
+            <div class="result-panel">
+                <div class="mode-section">
+                    <p class="section-label">Caption Mode</p>
+                    <div class="mode-tabs">
+                        <button class="mode-btn" data-mode="quick" onclick="setMode('quick')">
+                            <span class="mode-icon">&#9889;</span>
+                            <span class="mode-name">Quick</span>
+                            <span class="mode-desc">1 caption, fast</span>
+                        </button>
+                        <button class="mode-btn active" data-mode="detailed" onclick="setMode('detailed')">
+                            <span class="mode-icon">&#128269;</span>
+                            <span class="mode-name">Detailed</span>
+                            <span class="mode-desc">3 captions, 5 beams</span>
+                        </button>
+                        <button class="mode-btn" data-mode="creative" onclick="setMode('creative')">
+                            <span class="mode-icon">&#10024;</span>
+                            <span class="mode-name">Creative</span>
+                            <span class="mode-desc">High temp sampling</span>
+                        </button>
+                    </div>
+                </div>
+
+                <button class="btn-primary" id="captionBtn" onclick="generateCaption()" disabled>Generate Captions</button>
+
+                <div id="result" class="result-area hidden">
+                    <div class="result-header">
+                        <span class="mode-tag" id="modeTag"></span>
+                        <span class="time-tag" id="timeTag"></span>
+                    </div>
+                    <div id="captionList" class="caption-list"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Demo Gallery -->
+        <div class="gallery-section">
+            <p class="section-label">Demo Gallery -- click to try</p>
+            <div class="gallery" id="gallery">
+                <div class="gallery-item" onclick="loadDemoImage('https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/280px-PNG_transparency_demonstration_1.png', 'Dice on transparent background')">
+                    <div class="gallery-placeholder">&#127922;</div>
+                    <span>Dice</span>
+                </div>
+                <div class="gallery-item" onclick="loadDemoImage('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/1200px-Cat03.jpg', 'Cat photograph')">
+                    <div class="gallery-placeholder">&#128049;</div>
+                    <span>Cat</span>
+                </div>
+                <div class="gallery-item" onclick="loadDemoImage('https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Dog_park_in_San_Jose.jpg/1200px-Dog_park_in_San_Jose.jpg', 'Dogs in a park')">
+                    <div class="gallery-placeholder">&#128054;</div>
+                    <span>Dogs</span>
+                </div>
+                <div class="gallery-item" onclick="loadDemoImage('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png', 'Landscape photo')">
+                    <div class="gallery-placeholder">&#127748;</div>
+                    <span>Landscape</span>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Built with PyTorch + HuggingFace Transformers | <a href="https://github.com/Zinga18018/image-captioner" target="_blank">Source Code</a></p>
+        </footer>
+    </div>
+    <script src="/script.js"></script>
+</body>
+</html>

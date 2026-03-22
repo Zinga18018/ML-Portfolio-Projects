@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG Document Brain</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <div>
+                <h1>RAG Document Brain</h1>
+                <p class="subtitle">Semantic search + document Q&A via Sentence-Transformers + ChromaDB</p>
+            </div>
+            <div class="model-badge">MiniLM-L6-v2 + TinyLlama-1.1B</div>
+        </header>
+
+        <div class="tabs">
+            <button class="tab active" data-tab="ingest">Ingest</button>
+            <button class="tab" data-tab="pdf">PDF Import</button>
+            <button class="tab" data-tab="csv">CSV Import</button>
+            <button class="tab" data-tab="ask">Ask</button>
+            <button class="tab" data-tab="query">Search</button>
+            <button class="tab" data-tab="manage">Manage</button>
+        </div>
+
+        <!-- Ingest Tab -->
+        <div id="tab-ingest" class="tab-content active">
+            <div class="card">
+                <h3>Paste Text</h3>
+                <input type="text" id="docTitle" class="input" placeholder="Document title" value="my-document">
+                <textarea id="docText" placeholder="Paste any text content here..." rows="10" spellcheck="false"></textarea>
+                <button class="btn-primary" onclick="ingestText()">Ingest Text</button>
+            </div>
+            <div class="card" style="margin-top: 12px;">
+                <h3>Upload Text File</h3>
+                <div class="upload-zone" id="uploadZone">
+                    <p>Drop a file here or click to browse</p>
+                    <p class="hint">.txt, .md, .py</p>
+                    <input type="file" id="fileInput" hidden accept=".txt,.md,.py,.json,.js,.html,.css">
+                </div>
+                <button class="btn-primary" onclick="ingestFile()">Ingest File</button>
+            </div>
+            <div id="ingestResult" class="result hidden"></div>
+        </div>
+
+        <!-- PDF Import Tab -->
+        <div id="tab-pdf" class="tab-content">
+            <div class="card">
+                <h3>PDF Research Paper Import</h3>
+                <p class="hint-text">Upload any PDF -- research papers, textbooks, reports. Text is extracted page-by-page and indexed for semantic search.</p>
+                <div class="upload-zone" id="pdfUploadZone">
+                    <p>Drop a PDF here or click to browse</p>
+                    <p class="hint">.pdf files</p>
+                    <input type="file" id="pdfFileInput" hidden accept=".pdf">
+                </div>
+            </div>
+
+            <!-- PDF Preview -->
+            <div id="pdfPreview" class="hidden">
+                <div class="card" style="margin-top: 12px;">
+                    <div class="csv-header">
+                        <h3 id="pdfFileName">paper.pdf</h3>
+                        <span id="pdfMeta" class="meta-text"></span>
+                    </div>
+                    <div class="pdf-pages" id="pdfPages"></div>
+                </div>
+                <div class="card" style="margin-top: 12px;">
+                    <h3>Select Page Range</h3>
+                    <div class="row" style="margin-bottom: 14px;">
+                        <label class="label">From page: <input type="number" id="pdfPageStart" class="input small" value="1" min="1"></label>
+                        <label class="label">To page: <input type="number" id="pdfPageEnd" class="input small" value="0" min="0"> <span class="hint-text" style="margin:0">(0 = all)</span></label>
+                    </div>
+                    <button class="btn-primary" onclick="ingestPDF()">Ingest PDF</button>
+                </div>
+            </div>
+            <div id="pdfResult" class="result hidden"></div>
+        </div>
+
+        <!-- CSV Import Tab -->
+        <div id="tab-csv" class="tab-content">
+            <div class="card">
+                <h3>CSV Smart Import</h3>
+                <p class="hint-text">Upload a CSV file, preview data, and select which columns to index.</p>
+                <div class="upload-zone" id="csvUploadZone">
+                    <p>Drop a CSV file here</p>
+                    <p class="hint">.csv files only</p>
+                    <input type="file" id="csvFileInput" hidden accept=".csv">
+                </div>
+            </div>
+
+            <!-- CSV Preview -->
+            <div id="csvPreview" class="hidden">
+                <div class="card" style="margin-top: 12px;">
+                    <div class="csv-header">
+                        <h3 id="csvFileName">file.csv</h3>
+                        <span id="csvMeta" class="meta-text"></span>
+                    </div>
+                    <div class="table-wrap">
+                        <table id="csvTable" class="csv-table">
+                            <thead id="csvThead"></thead>
+                            <tbody id="csvTbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card" style="margin-top: 12px;">
+                    <h3>Select Columns to Index</h3>
+                    <div id="columnPicker" class="column-picker"></div>
+                    <button class="btn-primary" onclick="ingestCSV()">Ingest Selected Columns</button>
+                </div>
+            </div>
+            <div id="csvResult" class="result hidden"></div>
+        </div>
+
+        <!-- Ask (Chatbot) Tab -->
+        <div id="tab-ask" class="tab-content">
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="chat-welcome">
+                        <div class="chat-welcome-icon">&#129504;</div>
+                        <h3>Ask your documents anything</h3>
+                        <p>Upload a PDF, CSV, or text first, then ask questions here. I'll read the relevant sections and give you a clear answer.</p>
+                    </div>
+                </div>
+                <div class="chat-input-area">
+                    <textarea id="askInput" placeholder="Ask a question about your documents..." rows="2" spellcheck="false"
+                        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();askQuestion();}"></textarea>
+                    <button class="btn-send" id="askBtn" onclick="askQuestion()">&#9654;</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Query Tab -->
+        <div id="tab-query" class="tab-content">
+            <div class="card">
+                <textarea id="queryInput" placeholder="What is...? How does...?" rows="3" spellcheck="false"></textarea>
+                <div class="row">
+                    <label class="label">Results: <input type="number" id="topK" class="input small" value="5" min="1" max="10"></label>
+                    <button class="btn-primary" style="flex:1" onclick="queryDocs()">Search</button>
+                </div>
+            </div>
+            <div id="queryResult" class="hidden"></div>
+        </div>
+
+        <!-- Manage Tab -->
+        <div id="tab-manage" class="tab-content">
+            <div class="card">
+                <button class="btn-primary" onclick="getStatus()">Check Status</button>
+                <div id="statusResult" class="status-area"></div>
+                <!-- Word Cloud -->
+                <div id="wordCloudWrap" class="hidden">
+                    <h3 style="margin-top:16px">Top Terms</h3>
+                    <canvas id="wordCloud" width="700" height="300"></canvas>
+                </div>
+            </div>
+            <div class="card" style="margin-top: 12px;">
+                <button class="btn-danger" onclick="clearAll()">Clear All Documents</button>
+            </div>
+        </div>
+
+        <footer>
+            <p>Built with Sentence-Transformers + ChromaDB | <a href="https://github.com/Zinga18018/rag-document-brain" target="_blank">Source Code</a></p>
+        </footer>
+    </div>
+    <script src="/script.js"></script>
+</body>
+</html>
