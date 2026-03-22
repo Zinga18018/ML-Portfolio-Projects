@@ -335,6 +335,54 @@ img { max-width: 100%; display: block; }
 }
 .proj-link-live:hover { color: #a78bfa; }
 
+/* ── CATEGORY TABS ── */
+.category-tabs {
+    display: flex; gap: 8px; margin-bottom: 32px;
+    flex-wrap: wrap;
+}
+.cat-tab {
+    font-family: var(--font); font-size: 0.8rem; font-weight: 500;
+    padding: 8px 18px; border-radius: 100px;
+    border: 1px solid var(--border); background: transparent;
+    color: var(--text-dim); cursor: pointer;
+    transition: all 0.25s;
+}
+.cat-tab:hover { border-color: var(--border-hover); color: var(--text); }
+.cat-tab.active {
+    background: var(--accent); border-color: var(--accent);
+    color: #fff;
+}
+
+/* ── PROJECT CATEGORY BADGES ── */
+.project-cat-badge {
+    display: inline-block; font-size: 0.65rem; font-weight: 700;
+    padding: 3px 10px; border-radius: 100px;
+    letter-spacing: 0.8px; text-transform: uppercase;
+    margin-bottom: 10px;
+}
+.cat-ai { background: rgba(139, 92, 246, 0.15); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.2); }
+.cat-ml { background: rgba(34, 197, 94, 0.12); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.2); }
+
+/* ── PROJECT PLACEHOLDER (for new projects without screenshots) ── */
+.project-placeholder {
+    width: 100%; height: 100%; min-height: 200px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    background: linear-gradient(135deg, var(--surface), var(--bg-elevated));
+    gap: 6px;
+}
+.project-placeholder span {
+    font-size: 1rem; font-weight: 600; color: var(--text-bright);
+}
+.project-placeholder small {
+    font-size: 0.75rem; color: var(--text-dim);
+}
+
+/* Hide/show for category filtering */
+.project-card.hidden {
+    display: none !important;
+}
+
 /* ── ADDITIONAL RESEARCH ── */
 .subsection-title {
     font-size: 1.1rem; font-weight: 600; color: var(--text-bright);

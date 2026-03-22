@@ -59,19 +59,19 @@
             <!-- Bento stats row -->
             <div class="hero-stats anim-fade" data-delay="650">
                 <div class="stat-card">
-                    <span class="stat-num" data-target="5">0</span>
+                    <span class="stat-num" data-target="10">0</span>
                     <span class="stat-label">Live Demos</span>
                 </div>
                 <div class="stat-card">
-                    <span class="stat-num" data-target="7">0</span>
+                    <span class="stat-num" data-target="12">0</span>
                     <span class="stat-label">Models Deployed</span>
                 </div>
                 <div class="stat-card">
-                    <span class="stat-num" data-target="8">0</span>
+                    <span class="stat-num" data-target="10">0</span>
                     <span class="stat-label">Research Projects</span>
                 </div>
                 <div class="stat-card">
-                    <span class="stat-num" data-target="3">0</span>
+                    <span class="stat-num" data-target="5">0</span>
                     <span class="stat-label">LLM Pipelines</span>
                 </div>
             </div>
@@ -141,151 +141,237 @@
     <section class="section" id="projects">
         <div class="container">
             <div class="section-label anim-fade">Projects</div>
-            <h2 class="section-title anim-fade">Deployed AI systems</h2>
-            <p class="section-subtitle anim-fade">Production systems with real transformer inference. Each has a live demo on Hugging Face.</p>
+            <h2 class="section-title anim-fade">Deployed AI &amp; ML systems</h2>
+            <p class="section-subtitle anim-fade">10 production systems with live demos on Hugging Face. Each project ships with real inference.</p>
+
+            <!-- Category tabs -->
+            <div class="category-tabs anim-fade">
+                <button class="cat-tab active" data-cat="all">All Projects</button>
+                <button class="cat-tab" data-cat="ai">AI &amp; LLM Systems</button>
+                <button class="cat-tab" data-cat="ml">ML &amp; Deep Learning</button>
+            </div>
 
             <div class="projects-grid">
 
-                <!-- Project 1: AI Code Reviewer — featured large -->
-                <article class="project-card project-featured anim-fade">
+                <!-- ══════════ AI & LLM SYSTEMS ══════════ -->
+
+                <!-- AI 1: Code Reviewer — featured -->
+                <article class="project-card project-featured anim-fade" data-cat="ai">
                     <a href="https://huggingface.co/spaces/Yogesh18018/ai-code-reviewer" target="_blank" class="project-img-wrap">
                         <img src="screenshots/ai-code-reviewer.png" alt="AI Code Reviewer" loading="lazy">
                         <span class="project-img-overlay">Open demo &rarr;</span>
                     </a>
                     <div class="project-body">
-                        <div class="project-num">01</div>
+                        <span class="project-cat-badge cat-ai">AI</span>
                         <h3 class="project-title">Automated Code Quality Assessment via LLM Inference</h3>
-                        <p class="project-desc">TinyLlama-1.1B system for automated code review with severity classification, category tagging, and composite quality scoring. KV-cache optimized inference.</p>
+                        <p class="project-desc">TinyLlama-1.1B system for automated code review with severity classification, category tagging, and composite quality scoring. KV-cache optimized.</p>
                         <div class="project-tags">
                             <span>TinyLlama-1.1B</span><span>FastAPI</span><span>PyTorch</span><span>KV Cache</span><span>Docker</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/Zinga18018/ai-code-reviewer" target="_blank" class="proj-link">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                                Source
-                            </a>
-                            <a href="https://huggingface.co/spaces/Yogesh18018/ai-code-reviewer" target="_blank" class="proj-link proj-link-live">
-                                Live Demo &rarr;
-                            </a>
+                            <a href="https://github.com/Zinga18018/ai-code-reviewer" target="_blank" class="proj-link">Source</a>
+                            <a href="https://huggingface.co/spaces/Yogesh18018/ai-code-reviewer" target="_blank" class="proj-link proj-link-live">Live Demo &rarr;</a>
                         </div>
                     </div>
                 </article>
 
-                <!-- Project 2: RAG Document Brain -->
-                <article class="project-card anim-fade">
+                <!-- AI 2: RAG -->
+                <article class="project-card anim-fade" data-cat="ai">
                     <a href="https://huggingface.co/spaces/Yogesh18018/rag-document-brain" target="_blank" class="project-img-wrap">
                         <img src="screenshots/rag-document-brain.png" alt="RAG Document Brain" loading="lazy">
                         <span class="project-img-overlay">Open demo &rarr;</span>
                     </a>
                     <div class="project-body">
-                        <div class="project-num">02</div>
+                        <span class="project-cat-badge cat-ai">AI</span>
                         <h3 class="project-title">Retrieval-Augmented Generation for Document Q&A</h3>
-                        <p class="project-desc">End-to-end RAG pipeline with PDF/CSV ingestion, 384d sentence embeddings, ChromaDB vector search, and TinyLlama answer synthesis with citations.</p>
+                        <p class="project-desc">RAG pipeline with PDF/CSV ingestion, 384d sentence embeddings, ChromaDB vector search, and TinyLlama answer synthesis.</p>
                         <div class="project-tags">
                             <span>Sentence-Transformers</span><span>ChromaDB</span><span>TinyLlama</span><span>FastAPI</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/Zinga18018/rag-document-brain" target="_blank" class="proj-link">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                                Source
-                            </a>
+                            <a href="https://github.com/Zinga18018/rag-document-brain" target="_blank" class="proj-link">Source</a>
                             <a href="https://huggingface.co/spaces/Yogesh18018/rag-document-brain" target="_blank" class="proj-link proj-link-live">Demo &rarr;</a>
                         </div>
                     </div>
                 </article>
 
-                <!-- Project 3: Sentiment Engine -->
-                <article class="project-card anim-fade">
+                <!-- AI 3: Sentiment -->
+                <article class="project-card anim-fade" data-cat="ai">
                     <a href="https://huggingface.co/spaces/Yogesh18018/sentiment-engine" target="_blank" class="project-img-wrap">
                         <img src="screenshots/sentiment-engine.png" alt="Sentiment Engine" loading="lazy">
                         <span class="project-img-overlay">Open demo &rarr;</span>
                     </a>
                     <div class="project-body">
-                        <div class="project-num">03</div>
+                        <span class="project-cat-badge cat-ai">AI</span>
                         <h3 class="project-title">Real-Time Sentiment Classification with DistilBERT</h3>
-                        <p class="project-desc">Production API with DistilBERT (67M params) for real-time sentiment analysis, batch processing, and session-level trend visualization.</p>
+                        <p class="project-desc">DistilBERT (67M params) for real-time sentiment analysis with batch processing and trend visualization.</p>
                         <div class="project-tags">
                             <span>DistilBERT</span><span>FastAPI</span><span>Chart.js</span><span>Docker</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/Zinga18018/sentiment-engine" target="_blank" class="proj-link">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                                Source
-                            </a>
+                            <a href="https://github.com/Zinga18018/sentiment-engine" target="_blank" class="proj-link">Source</a>
                             <a href="https://huggingface.co/spaces/Yogesh18018/sentiment-engine" target="_blank" class="proj-link proj-link-live">Demo &rarr;</a>
                         </div>
                     </div>
                 </article>
 
-                <!-- Project 4: Image Captioner -->
-                <article class="project-card anim-fade">
+                <!-- AI 4: Captioner -->
+                <article class="project-card anim-fade" data-cat="ai">
                     <a href="https://huggingface.co/spaces/Yogesh18018/image-captioner" target="_blank" class="project-img-wrap">
                         <img src="screenshots/image-captioner.png" alt="Image Captioner" loading="lazy">
                         <span class="project-img-overlay">Open demo &rarr;</span>
                     </a>
                     <div class="project-body">
-                        <div class="project-num">04</div>
+                        <span class="project-cat-badge cat-ai">AI</span>
                         <h3 class="project-title">Vision-Language Caption Synthesis with ViT + GPT-2</h3>
-                        <p class="project-desc">Image-to-text generation using ViT encoder + GPT-2 decoder. Three inference modes via beam search and temperature-controlled sampling.</p>
+                        <p class="project-desc">Image-to-text generation via ViT encoder + GPT-2 decoder. Beam search and temperature-controlled sampling.</p>
                         <div class="project-tags">
                             <span>ViT</span><span>GPT-2</span><span>VisionEncoderDecoder</span><span>FastAPI</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/Zinga18018/image-captioner" target="_blank" class="proj-link">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                                Source
-                            </a>
+                            <a href="https://github.com/Zinga18018/image-captioner" target="_blank" class="proj-link">Source</a>
                             <a href="https://huggingface.co/spaces/Yogesh18018/image-captioner" target="_blank" class="proj-link proj-link-live">Demo &rarr;</a>
                         </div>
                     </div>
                 </article>
 
-                <!-- Project 5: Multi-Agent Orchestrator -->
-                <article class="project-card anim-fade">
+                <!-- AI 5: Multi-Agent -->
+                <article class="project-card anim-fade" data-cat="ai">
                     <a href="https://huggingface.co/spaces/Yogesh18018/multi-agent" target="_blank" class="project-img-wrap">
                         <img src="screenshots/multi-agent.png" alt="Multi-Agent Orchestrator" loading="lazy">
                         <span class="project-img-overlay">Open demo &rarr;</span>
                     </a>
                     <div class="project-body">
-                        <div class="project-num">05</div>
+                        <span class="project-cat-badge cat-ai">AI</span>
                         <h3 class="project-title">Multi-Agent Collaborative Reasoning with Chain-of-Thought</h3>
-                        <p class="project-desc">Framework decomposing complex tasks across specialized LLM agents. Planner, domain agents, and synthesizer with chain-of-thought reasoning.</p>
+                        <p class="project-desc">Specialized LLM agents with planner, domain experts, and synthesizer using chain-of-thought reasoning.</p>
                         <div class="project-tags">
-                            <span>TinyLlama</span><span>Agent Framework</span><span>CoT</span><span>FastAPI</span><span>Async</span>
+                            <span>TinyLlama</span><span>Agent Framework</span><span>CoT</span><span>FastAPI</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/Zinga18018/multi-agent-orchestrator" target="_blank" class="proj-link">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                                Source
-                            </a>
+                            <a href="https://github.com/Zinga18018/multi-agent-orchestrator" target="_blank" class="proj-link">Source</a>
                             <a href="https://huggingface.co/spaces/Yogesh18018/multi-agent" target="_blank" class="proj-link proj-link-live">Demo &rarr;</a>
                         </div>
                     </div>
                 </article>
 
-            </div>
+                <!-- ══════════ ML & DEEP LEARNING ══════════ -->
 
-            <!-- Additional Research -->
-            <h3 class="subsection-title anim-fade">Other research</h3>
-            <div class="research-grid">
-                <div class="research-card anim-fade">
-                    <div class="project-num">06</div>
-                    <h4>Neural Symptom Comprehension &amp; Medical Insight Generation</h4>
-                    <p>Mistral LLM converting free-text symptoms into structured medical insights with physician-style dashboards.</p>
-                    <div class="project-tags"><span>Mistral</span><span>Streamlit</span><span>NLP</span></div>
-                </div>
-                <div class="research-card anim-fade">
-                    <div class="project-num">07</div>
-                    <h4>AI-Assisted Data Integrity Validation Pipeline</h4>
-                    <p>Validation pipeline scanning 1M+ rows in under two minutes with Isolation Forest anomaly detection at 93% precision.</p>
-                    <div class="project-tags"><span>Pandas</span><span>Great Expectations</span><span>Isolation Forest</span></div>
-                </div>
-                <div class="research-card anim-fade">
-                    <div class="project-num">08</div>
-                    <h4>Financial Discourse Analysis for Volatility Modeling</h4>
-                    <p>Sentiment aggregation from Twitter, Reddit, and financial news. Discovered 0.65 correlation with short-term price movement.</p>
-                    <div class="project-tags"><span>VADER</span><span>Redis</span><span>Streamlit</span></div>
-                </div>
+                <!-- ML 1: Neural Style Transfer — featured -->
+                <article class="project-card project-featured anim-fade" data-cat="ml">
+                    <a href="https://huggingface.co/spaces/Yogesh18018/neural-style-transfer" target="_blank" class="project-img-wrap">
+                        <div class="project-placeholder">
+                            <span>Neural Style Transfer</span>
+                            <small>VGG19 + Generative Art</small>
+                        </div>
+                        <span class="project-img-overlay">Open demo &rarr;</span>
+                    </a>
+                    <div class="project-body">
+                        <span class="project-cat-badge cat-ml">DL</span>
+                        <h3 class="project-title">Neural Style Transfer &amp; Generative Art with VGG19</h3>
+                        <p class="project-desc">Gatys et al. neural style transfer using VGG19 Gram matrices. Includes procedural generative art with fractals, flow fields, and wave interference patterns.</p>
+                        <div class="project-tags">
+                            <span>PyTorch</span><span>VGG19</span><span>Gram Matrices</span><span>Perlin Noise</span><span>Streamlit</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Zinga18018/Neural-Style-Transfer-and-Generative-Art-Lab" target="_blank" class="proj-link">Source</a>
+                            <a href="https://huggingface.co/spaces/Yogesh18018/neural-style-transfer" target="_blank" class="proj-link proj-link-live">Live Demo &rarr;</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ML 2: Time Series -->
+                <article class="project-card anim-fade" data-cat="ml">
+                    <a href="https://huggingface.co/spaces/Yogesh18018/time-series-forecasting" target="_blank" class="project-img-wrap">
+                        <div class="project-placeholder">
+                            <span>Time Series Forecasting</span>
+                            <small>ARIMA + Holt-Winters</small>
+                        </div>
+                        <span class="project-img-overlay">Open demo &rarr;</span>
+                    </a>
+                    <div class="project-body">
+                        <span class="project-cat-badge cat-ml">ML</span>
+                        <h3 class="project-title">Time Series Forecasting with Transformer Architectures</h3>
+                        <p class="project-desc">Interactive forecasting with ARIMA, Holt-Winters, and ML models. Automated feature engineering with lag, rolling, and trend decomposition.</p>
+                        <div class="project-tags">
+                            <span>statsmodels</span><span>ARIMA</span><span>Holt-Winters</span><span>scikit-learn</span><span>Streamlit</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Zinga18018/Time-Series-Forecasting-with-Transformer-Architectures" target="_blank" class="proj-link">Source</a>
+                            <a href="https://huggingface.co/spaces/Yogesh18018/time-series-forecasting" target="_blank" class="proj-link proj-link-live">Demo &rarr;</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ML 3: Anomaly Detection -->
+                <article class="project-card anim-fade" data-cat="ml">
+                    <a href="https://huggingface.co/spaces/Yogesh18018/anomaly-detection" target="_blank" class="project-img-wrap">
+                        <div class="project-placeholder">
+                            <span>Anomaly Detection</span>
+                            <small>Isolation Forest + Ensemble</small>
+                        </div>
+                        <span class="project-img-overlay">Open demo &rarr;</span>
+                    </a>
+                    <div class="project-body">
+                        <span class="project-cat-badge cat-ml">ML</span>
+                        <h3 class="project-title">Multimodal Anomaly Detection with Synthetic Augmentation</h3>
+                        <p class="project-desc">Five detection algorithms (Isolation Forest, LOF, DBSCAN, Z-Score, IQR) with ensemble voting and synthetic data augmentation for imbalanced datasets.</p>
+                        <div class="project-tags">
+                            <span>Isolation Forest</span><span>LOF</span><span>DBSCAN</span><span>imbalanced-learn</span><span>Streamlit</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Zinga18018/Multimodal-Anomaly-Detection-with-Synthetic-Augmentation" target="_blank" class="proj-link">Source</a>
+                            <a href="https://huggingface.co/spaces/Yogesh18018/anomaly-detection" target="_blank" class="proj-link proj-link-live">Demo &rarr;</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ML 4: Drift Detection -->
+                <article class="project-card anim-fade" data-cat="ml">
+                    <a href="https://huggingface.co/spaces/Yogesh18018/drift-detection" target="_blank" class="project-img-wrap">
+                        <div class="project-placeholder">
+                            <span>Drift Detection</span>
+                            <small>KS + PSI + JS Divergence</small>
+                        </div>
+                        <span class="project-img-overlay">Open demo &rarr;</span>
+                    </a>
+                    <div class="project-body">
+                        <span class="project-cat-badge cat-ml">ML</span>
+                        <h3 class="project-title">ML Model Monitoring &amp; Data Drift Detection</h3>
+                        <p class="project-desc">Real-time model monitoring with KS test, PSI, and Jensen-Shannon divergence. Tracks feature drift, prediction shifts, and model degradation.</p>
+                        <div class="project-tags">
+                            <span>scikit-learn</span><span>scipy</span><span>KS Test</span><span>PSI</span><span>Streamlit</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Zinga18018/ML-Model-Monitoring-and-Data-Drift-Detection" target="_blank" class="proj-link">Source</a>
+                            <a href="https://huggingface.co/spaces/Yogesh18018/drift-detection" target="_blank" class="proj-link proj-link-live">Demo &rarr;</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ML 5: Knowledge Graph -->
+                <article class="project-card anim-fade" data-cat="ml">
+                    <a href="https://huggingface.co/spaces/Yogesh18018/knowledge-graph-engine" target="_blank" class="project-img-wrap">
+                        <div class="project-placeholder">
+                            <span>Knowledge Graph</span>
+                            <small>spaCy + NetworkX</small>
+                        </div>
+                        <span class="project-img-overlay">Open demo &rarr;</span>
+                    </a>
+                    <div class="project-body">
+                        <span class="project-cat-badge cat-ml">NLP</span>
+                        <h3 class="project-title">Knowledge Graph Construction &amp; Reasoning Engine</h3>
+                        <p class="project-desc">NER-driven knowledge graph with interactive PyVis visualization. Extracts entities and relationships from unstructured text via spaCy pipelines.</p>
+                        <div class="project-tags">
+                            <span>spaCy</span><span>NetworkX</span><span>PyVis</span><span>Plotly</span><span>Streamlit</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Zinga18018/Knowledge-Graph-Construction-and-Reasoning-Engine" target="_blank" class="proj-link">Source</a>
+                            <a href="https://huggingface.co/spaces/Yogesh18018/knowledge-graph-engine" target="_blank" class="proj-link proj-link-live">Demo &rarr;</a>
+                        </div>
+                    </div>
+                </article>
+
             </div>
         </div>
     </section>

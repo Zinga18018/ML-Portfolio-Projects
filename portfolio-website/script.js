@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initCounters();
     initSmoothScroll();
     initActiveNav();
+    initCategoryFilter();
 });
 
 /* ---- NAV ---- */
@@ -120,6 +121,28 @@ function initSmoothScroll() {
                 window.scrollTo({ top, behavior: 'smooth' });
                 history.pushState(null, '', href);
             }
+        });
+    });
+}
+
+/* ---- CATEGORY FILTER ---- */
+function initCategoryFilter() {
+    const tabs = document.querySelectorAll('.cat-tab');
+    const cards = document.querySelectorAll('.project-card[data-cat]');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            const cat = tab.dataset.cat;
+            cards.forEach(card => {
+                if (cat === 'all' || card.dataset.cat === cat) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
         });
     });
 }
